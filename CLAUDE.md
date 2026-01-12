@@ -1,10 +1,8 @@
 # CLAUDE.md
 
-This file provides guidance to AI agents when working with this codebase.
-
 ## Project Overview
 
-This project is a framework for building agent promptsto run against Teradata platform. It aims to contain the necessary templates and configurations for agent development. 
+This project is a framework for building and running agent prompts to run against a Teradata platform.
 
 ## Output Expectations
 
