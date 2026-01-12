@@ -6,11 +6,9 @@ A framework for building specialized AI agents that work with the Teradata platf
 
 AgentBuilder enables the creation of intelligent agents that can automate complex Teradata operations including database administration, security auditing, space management, SQL optimization, and more. The framework leverages Claude Code's sub-agent architecture and integrates with the teradataMCP server for comprehensive database operations.
 
-The framework features **TeradataAssistant**, an intelligent routing agent that uses progressive prompting to automatically route requests to specialized personas (DBA, Data Scientist, Data Engineer), providing a unified entry point for all Teradata tasks with access to 126+ documented SQL functions and process workflows.
-
 ## Key Features
 
-- **Intelligent Routing**: TeradataAssistant main entry point with progressive prompting and persona-based routing
+- **Intelligent Routing**: teradata-code-generator main entry point with progressive prompting and persona-based routing
 - **Progressive Prompting**: Hierarchical workflow system (Entry → Persona → Process → Function) with 126+ documented functions
 - **Three Specialized Personas**: DBA, Data Scientist, and Data Engineer with domain expertise
 - **Modular Agent Architecture**: Pre-built specialized agents for Teradata, business intelligence, and utilities
@@ -50,8 +48,8 @@ AgentBuilder/
 │           ├── all_skills.md
 │           ├── load_ai_docs.md
 │           └── prime.md
-├── app/                     # TeradataAssistant prompt library
-│   └── TeradataAssistant/
+├── app/                     # TeradataCodeGenerator prompt library
+│   └── TeradataCodeGenerator/
 │       ├── FunctionalPrompts/
 │       │   ├── Core_SQL_Functions/      # 126+ SQL function prompts
 │       │   ├── Advanced_Analytics/      # Advanced analytics prompts
@@ -162,7 +160,7 @@ A specialist agent for Teradata statistics analysis and maintenance.
 - Troubleshooting slow queries
 - Database performance tuning
 
-#### TeradataAssistant
+#### TeradataCodeGenerator
 **Color**: Orange | **Model**: Sonnet
 
 An intelligent routing agent that serves as the main entry point for all Teradata assistance. Uses progressive prompting to route requests to specialized personas based on task analysis.
@@ -286,20 +284,20 @@ A database hierarchy documentation generator that creates structured documentati
 - **`/utils:load_ai_docs`** - Loads or updates AI documentation resources
 - **`/utils:all_skills`** - Lists all available skills from system prompt
 
-## TeradataAssistant Prompt Library
+## TeradataCodeGenerator Prompt Library
 
-The `app/TeradataAssistant/` directory contains a comprehensive library of reusable prompts and templates for Teradata operations, organized using a **progressive prompting architecture**.
+The `app/TeradataCodeGenerator/` directory contains a comprehensive library of reusable prompts and templates for Teradata operations, organized using a **progressive prompting architecture**.
 
 ### Progressive Prompting Architecture
 
-The TeradataAssistant uses a hierarchical routing system:
+The TeradataCodeGenerator uses a hierarchical routing system:
 
 ```
 Entry Point → Persona Files → Process Prompts → Functional Prompts
 ```
 
 **Flow:**
-1. **TeradataAssistant.md** (Entry Point) - Analyzes user intent and routes to appropriate persona
+1. **TeradataCodeGenerator.md** (Entry Point) - Analyzes user intent and routes to appropriate persona
 2. **Persona Files** - Specialized experts (DBA, Data Scientist, Data Engineer)
 3. **Process Prompts** - Step-by-step workflows for specific tasks
 4. **Functional Prompts** - Detailed documentation for individual SQL functions (126+ functions)

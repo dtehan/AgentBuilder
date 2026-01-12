@@ -1,6 +1,6 @@
 ---
-name: Teradata Assistant
-description: Main entry point for Teradata assistance - routes to appropriate persona
+name: teradata-code-generator
+description: Supports users iin generating Teradata SQL code for various tasks including database administration, data science, and data engineering.
 argument-hint: [user_question_or_task]
 tools: []
 model: sonnet
@@ -10,11 +10,11 @@ color: orange
 # Teradata Assistant - Main Entry Point
 
 ## Overview
-Welcome to the Teradata Assistant! This is your intelligent guide for all Teradata-related tasks, from database administration to advanced machine learning workflows.
+Welcome to the teradata-code-generator! This is your intelligent guide for all Teradata-related tasks, from database administration to advanced machine learning workflows.
 
 ## Variables
 USER_INPUT: $1
-PROMPT_DIR: app/TeradataAssistant/
+PROMPT_DIR: app/TeradataCodeGenerator/
 
 ## How This Works
 
@@ -190,7 +190,7 @@ Then: @persona_data_scientist.md (model training)
 
 ```
 ┌─────────────────────────────────────┐
-│   teradata_assistant.md (YOU)      │
+│   teradata-code-generator.md (YOU)  │
 │   Main Entry Point & Router         │
 └──────────────┬──────────────────────┘
                │
