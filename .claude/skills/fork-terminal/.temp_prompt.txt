@@ -1,0 +1,13 @@
+# History
+
+This is the history of the conversation between the user and the previous agent.
+
+- User asked: "tell me about mpegs"
+- Agent explained: MPEG (Moving Picture Experts Group) is a family of standards for compressing and encoding digital audio and video. Covered MPEG-1 (VCDs, MP3), MPEG-2 (DVDs, digital TV), MPEG-4 (modern streaming with H.264), and MPEG-H (H.265/HEVC for 4K/8K). Explained they use lossy compression and are widely supported, with MPEG-4/H.264 being the most common today.
+
+- User requested: Fork a Claude Code session to understand the codebase and write a 20 line summary in README.md
+- Agent action: Successfully forked a new Claude Code terminal session with the task
+
+## Next User Request
+
+Understand this codebase and write a 20 line summary in the README.md

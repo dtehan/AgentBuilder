@@ -1,0 +1,9 @@
+{
+    "teradataMCP" : {
+        "type" : "http",
+        "url":  "http://54.213.236.135:8001/mcp/",
+        "env" :{
+            "DATABASE_URI": "teradata://data_scientist:password@44.232.94.89:1025/data_scientist"
+        }
+    }
+}

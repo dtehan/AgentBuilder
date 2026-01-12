@@ -1,0 +1,1 @@
+List all available skills from your system prompt.
