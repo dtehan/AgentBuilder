@@ -28,8 +28,6 @@ AgentBuilder/
 │   └── commands/            # Skill/command definitions
 │       └── utils/
 │           ├── all_skills.md
-│           ├── load_ai_docs.md
-│           └── prime.md
 ├── app/                     # TeradataCodeGenerator prompt library
 │   └── TeradataCodeGenerator/
 │       ├── FunctionalPrompts/
@@ -363,17 +361,6 @@ For complete list of MCP capabilities, refer to the [teradataMCP documentation](
 }
 ```
 
-
-## Code Style Guidelines
-
-When contributing to or extending this project:
-
-- Use Teradata SQL and Python 3.12+ features and syntax
-- Use 4 spaces for indentation
-- Follow PEP 8 guidelines for Python code
-- Use descriptive variable and function names
-- Include docstrings for all functions and classes
-
 ## Getting Started
 
 1. Ensure you have Claude Code installed and configured
@@ -427,11 +414,6 @@ When contributing to or extending this project:
 @build_DBHierarchy document the hierarchy for database prod_environment
 ```
 
-### Create New Agent
-```
-@meta-agent create an agent that monitors query performance and sends alerts
-```
-
 ### Load Documentation
 ```
 /utils:load_ai_docs
@@ -447,25 +429,8 @@ To create a new agent:
 4. Update agent metadata (name, description, tools, model, color)
 5. Test the agent with sample scenarios
 
-## Agent Architecture
 
-Each agent follows a consistent structure:
-
-```markdown
----
-name: agent-name
-description: When to use this agent
-tools: tool1, tool2, tool3
-model: sonnet | opus | haiku
-color: red | blue | green | yellow | purple | orange | pink | cyan
----
-
-# Purpose
-[Agent role and responsibilities]
-
-## Instructions
-[Step-by-step workflow]
-
-## Report / Response
-[Output format and structure]
+### Create New Agent
+```
+@meta-agent create an agent that monitors query performance and sends alerts
 ```
