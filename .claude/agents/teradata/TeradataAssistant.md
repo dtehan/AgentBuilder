@@ -1,8 +1,10 @@
 ---
 name: Teradata Assistant
-allowed-tools:
 description: Main entry point for Teradata assistance - routes to appropriate persona
 argument-hint: [user_question_or_task]
+tools: []
+model: sonnet
+color: orange
 ---
 
 # Teradata Assistant - Main Entry Point
@@ -12,6 +14,7 @@ Welcome to the Teradata Assistant! This is your intelligent guide for all Terada
 
 ## Variables
 USER_INPUT: $1
+PROMPT_DIR: app/TeradataAssistant/
 
 ## How This Works
 
@@ -98,17 +101,17 @@ Based on the analysis:
 
 **If DBA-related:**
 ```
-Route to: @ProcessPrompts/persona_dba.md with argument: "${USER_INPUT}"
+Route to: ProcessPrompts/persona_dba.md in `PROMPT_DIR` with argument: "${USER_INPUT}"
 ```
 
 **If Data Science-related:**
 ```
-Route to: @ProcessPrompts/persona_data_scientist.md with argument: "${USER_INPUT}"
+Route to: ProcessPrompts/persona_data_scientist.md in `PROMPT_DIR` with argument: "${USER_INPUT}"
 ```
 
 **If Data Engineering-related:**
 ```
-Route to: @ProcessPrompts/persona_data_engineer.md with argument: "${USER_INPUT}"
+Route to: ProcessPrompts/persona_data_engineer.md in `PROMPT_DIR` with argument: "${USER_INPUT}"
 ```
 
 **If SQL Function Query (General):**
@@ -131,28 +134,28 @@ Route to: @ProcessPrompts/persona_data_engineer.md with argument: "${USER_INPUT}
 ```
 User: "I need to assess the health of my production database"
 Analysis: Contains keywords "assess", "health", "database"
-Route to: @ProcessPrompts/persona_dba.md with "I need to assess the health of my production database"
+Route to: ProcessPrompts/persona_dba.md in `PROMPT_DIR` with "I need to assess the health of my production database"
 ```
 
 ### Example 2: Data Science Task
 ```
 User: "How do I train an XGBoost model for customer churn prediction?"
 Analysis: Contains keywords "train", "XGBoost", "model", "prediction"
-Route to: @ProcessPrompts/persona_data_scientist.md with "How do I train an XGBoost model for customer churn prediction?"
+Route to: ProcessPrompts/persona_data_scientist.md in `PROMPT_DIR` with "How do I train an XGBoost model for customer churn prediction?"
 ```
 
 ### Example 3: Data Engineering Task
 ```
 User: "I need to clean my dataset and handle missing values before analysis"
 Analysis: Contains keywords "clean", "dataset", "missing values"
-Route to: @ProcessPrompts/persona_data_engineer.md with "I need to clean my dataset and handle missing values before analysis"
+Route to: ProcessPrompts/persona_data_engineer.md in `PROMPT_DIR` with "I need to clean my dataset and handle missing values before analysis"
 ```
 
 ### Example 4: SQL Function Query
 ```
 User: "How do I calculate a moving average in Teradata?"
 Analysis: Specific function query
-Action: Read FunctionalPrompts/INDEX.md, then FunctionalPrompts/Advanced_Analytics/movingaverage.md
+Action: Read FunctionalPrompts/INDEX.md, then FunctionalPrompts/Advanced_Analytics/movingaverage.md in `PROMPT_DIR`
 Provide: Syntax, examples, and use cases
 ```
 
@@ -178,9 +181,9 @@ Some tasks may require multiple personas. In such cases:
 ```
 User: "I want to build a churn prediction model - from data cleaning to deployment"
 Primary: @persona_data_engineer.md (data preparation)
-  └─> Invokes: ml/ml_dataPreparation.md
+  └─> Invokes: ml/ml_dataPreparation.md in `PROMPT_DIR`
 Then: @persona_data_scientist.md (model training)
-  └─> Invokes: ml/ml_modelTraining.md (if exists)
+  └─> Invokes: ml/ml_modelTraining.md in `PROMPT_DIR` (if exists)
 ```
 
 ## Progressive Prompting Flow
