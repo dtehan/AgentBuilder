@@ -6,24 +6,6 @@ A framework for building specialized AI agents that work with the Teradata platf
 
 AgentBuilder enables the creation of intelligent agents that can automate complex Teradata operations including database administration, security auditing, space management, SQL optimization, and more. The framework leverages Claude Code's sub-agent architecture and integrates with the teradataMCP server for comprehensive database operations.
 
-## Key Features
-
-- **Intelligent Routing**: teradata-code-generator main entry point with progressive prompting and persona-based routing
-- **Progressive Prompting**: Hierarchical workflow system (Entry → Persona → Process → Function) with 126+ documented functions
-- **Three Specialized Personas**: DBA, Data Scientist, and Data Engineer with domain expertise
-- **Modular Agent Architecture**: Pre-built specialized agents for Teradata, business intelligence, and utilities
-- **MCP Integration**: Direct connection to Teradata via teradataMCP server with 40+ tools across 8 categories
-- **Security Auditing**: Comprehensive permission analysis, role review, and security risk assessment
-- **Space Management**: Automated database space monitoring and reallocation strategies
-- **Compression Advisor**: Multi-Value Compression analysis with production-ready ALTER TABLE statements
-- **Statistics Management**: Automated statistics health assessment and COLLECT STATS recommendations
-- **SQL Optimization**: Query clustering, performance analysis, and optimization capabilities
-- **Business Intelligence**: Retail analytics agent for sales, customer, and inventory insights
-- **Agent Generation**: Meta-agent for creating new specialized agents from descriptions
-- **Comprehensive Prompt Library**: 126+ SQL functions plus DBA and ML process workflows
-- **Schema Documentation**: Automated generation of database schema and hierarchy documentation
-- **Documentation Loading**: Automated fetching and management of AI documentation resources
-
 ## Project Structure
 
 ```
@@ -31,7 +13,7 @@ AgentBuilder/
 ├── .claude/
 │   ├── agents/              # Agent definitions
 │   │   ├── teradata/        # Teradata-specific agents
-│   │   │   ├── TeradataAssistant.md           # Main routing agent (entry point)
+│   │   │   ├── teradata-code-generator.md           # Main routing agent (entry point)
 │   │   │   ├── teradata-security-auditor.md
 │   │   │   ├── teradata-space-manager.md
 │   │   │   ├── compression-advisor.md
@@ -82,7 +64,7 @@ AgentBuilder/
 
 ### Teradata-Specific Agents
 
-#### teradata-security-auditor
+#### Agent: teradata-security-auditor
 **Color**: Red | **Model**: Sonnet
 
 A specialist agent for generating comprehensive security reports and analyzing user permissions within Teradata environments.
@@ -102,7 +84,7 @@ A specialist agent for generating comprehensive security reports and analyzing u
 - Identifying separation of duties violations
 - Security hardening initiatives
 
-#### teradata-space-manager
+#### Agent: teradata-space-manager
 **Color**: Orange | **Model**: Sonnet
 
 A DBA specialist agent focused on database space management and optimization.
@@ -122,7 +104,7 @@ A DBA specialist agent focused on database space management and optimization.
 - Capacity planning
 - Database cleanup identification
 
-#### compression-advisor
+#### Agent: compression-advisor
 **Model**: Default
 
 An analytics specialist agent that performs rigorous cost-benefit analysis to identify optimal Multi-Value Compression (MVC) candidates.
@@ -141,7 +123,7 @@ An analytics specialist agent that performs rigorous cost-benefit analysis to id
 - Performance improvement through I/O reduction
 - Cost reduction in cloud environments
 
-#### teradata-statistics-collector
+#### Agent: teradata-statistics-collector
 **Model**: Default
 
 A specialist agent for Teradata statistics analysis and maintenance.
@@ -160,7 +142,7 @@ A specialist agent for Teradata statistics analysis and maintenance.
 - Troubleshooting slow queries
 - Database performance tuning
 
-#### TeradataCodeGenerator
+#### Agent: teradata-code-generator
 **Color**: Orange | **Model**: Sonnet
 
 An intelligent routing agent that serves as the main entry point for all Teradata assistance. Uses progressive prompting to route requests to specialized personas based on task analysis.
@@ -187,7 +169,7 @@ An intelligent routing agent that serves as the main entry point for all Teradat
 
 ### Business Domain Agents
 
-#### retail-analytics
+#### Agent: retail-analytics
 **Model**: Default
 
 A business intelligence specialist for analyzing retail data and generating insights.
@@ -208,7 +190,7 @@ A business intelligence specialist for analyzing retail data and generating insi
 
 ### Utility Agents
 
-#### meta-agent
+#### Agent: meta-agent
 **Color**: Cyan | **Model**: Opus
 
 An expert agent architect that generates new sub-agent configuration files from user descriptions.
@@ -225,7 +207,7 @@ An expert agent architect that generates new sub-agent configuration files from 
 - Creating domain-specific agents
 - Extending the framework with new capabilities
 
-#### load_doc_agent
+#### Agent: load_doc_agent
 **Model**: Default
 
 A research specialist for fetching and managing documentation resources.
@@ -242,7 +224,7 @@ A research specialist for fetching and managing documentation resources.
 - Loading AI Docs resources
 - Managing knowledge base content
 
-#### build_schemas
+#### Agent: build_schemas
 **Model**: Default
 
 A database schema documentation generator that creates comprehensive markdown documentation from existing SQL database schemas.
@@ -261,7 +243,7 @@ A database schema documentation generator that creates comprehensive markdown do
 - Data governance and lineage tracking
 - Schema change management
 
-#### build_DBHierarchy
+#### Agent: build_DBHierarchy
 **Model**: Default
 
 A database hierarchy documentation generator that creates structured documentation of database relationships.
@@ -281,8 +263,10 @@ A database hierarchy documentation generator that creates structured documentati
 - Data governance hierarchy mapping
 
 ### Available Skills/Commands
-- **`/utils:load_ai_docs`** - Loads or updates AI documentation resources
 - **`/utils:all_skills`** - Lists all available skills from system prompt
+
+- **fork-terminal skill** - allows the user to open a terminal session within Claude Code or CLI to run tasks
+
 
 ## TeradataCodeGenerator Prompt Library
 
@@ -297,7 +281,7 @@ Entry Point → Persona Files → Process Prompts → Functional Prompts
 ```
 
 **Flow:**
-1. **TeradataCodeGenerator.md** (Entry Point) - Analyzes user intent and routes to appropriate persona
+1. **teradata-code-generator.md** (Entry Point) - Analyzes user intent and routes to appropriate persona
 2. **Persona Files** - Specialized experts (DBA, Data Scientist, Data Engineer)
 3. **Process Prompts** - Step-by-step workflows for specific tasks
 4. **Functional Prompts** - Detailed documentation for individual SQL functions (126+ functions)
@@ -325,6 +309,14 @@ Entry Point → Persona Files → Process Prompts → Functional Prompts
 - Data profiling and integration
 - **Data engineering workflows**
 
+### Process Prompts
+
+**DBA Process Prompts** (`ProcessPrompts/dba/`)
+Process-oriented prompts for database administration tasks including maintenance, monitoring, and optimization workflows.
+
+**ML Process Prompts** (`ProcessPrompts/ml/`)
+Machine learning and predictive analytics workflow templates for Teradata ML capabilities.
+
 ### Functional Prompts (126+ Functions)
 
 **Core SQL Functions** (40+ prompts)
@@ -339,14 +331,6 @@ Detailed prompt templates for Teradata SQL functions including:
 **Advanced Analytics**
 Templates for complex analytical operations and advanced SQL patterns.
 
-### Process Prompts
-
-**DBA Process Prompts** (`ProcessPrompts/dba/`)
-Process-oriented prompts for database administration tasks including maintenance, monitoring, and optimization workflows.
-
-**ML Process Prompts** (`ProcessPrompts/ml/`)
-Machine learning and predictive analytics workflow templates for Teradata ML capabilities.
-
 ### Usage
 These prompts serve as building blocks for:
 - Intelligent routing to domain-specific expertise
@@ -359,58 +343,9 @@ These prompts serve as building blocks for:
 
 ## MCP Integration
 
-AgentBuilder connects to a teradataMCP server providing comprehensive tooling for Teradata operations:
+teradata-code-generator connects to a teradataMCP server providing comprehensive tooling for Teradata operations:
 
-### Tool Categories
-
-**Base/Core Database Tools** (9 tools)
-- Database and table listing
-- Query execution with bind parameters
-- Column descriptions and DDL generation
-- Table previews and usage analysis
-- Table affinity (relationship inference)
-
-**DBA Tools** (13 tools)
-- Database space management
-- Version information
-- Feature and flow control metrics
-- Resource usage summaries
-- Session information
-- Table and user SQL analysis
-- Table usage impact measurement
-
-**Quality Analysis Tools** (7 tools)
-- Column summary statistics
-- Missing and negative value detection
-- Standard deviation and univariate statistics
-- Distinct category analysis
-
-**Security Tools** (3 tools)
-- User database permissions
-- User role assignments
-- Role permission details
-
-**Vector Store (TDVS) Tools** (9 tools)
-- Vector store creation, update, and management
-- RAG-based question answering
-- Similarity search
-- User permission management
-
-**SQL Optimization Tools** (3 tools)
-- Query clustering and performance analysis
-- Cluster statistics analysis
-- Query pattern identification
-
-**RAG Tools** (1 tool)
-- Document-based question answering workflow
-
-**Feature Store Tools** (8 tools)
-- Dataset creation from features
-- Feature catalog access
-- Data domain and entity management
-
-**Plotting Tools** (4 tools)
-- Line, pie, polar, and radar chart generation
+For complete list of MCP capabilities, refer to the [teradataMCP documentation](ai_docs/doc_teradataMCP.md).
 
 ## Configuration
 
@@ -420,20 +355,14 @@ AgentBuilder connects to a teradataMCP server providing comprehensive tooling fo
 {
   "teradataMCP": {
     "type": "http",
-    "url": "http://54.213.236.135:8001/mcp/",
+    "url": "http://MCP_host_address:8001/mcp/",
     "env": {
-      "DATABASE_URI": "teradata://data_scientist:password@44.232.94.89:1025/data_scientist"
+      "DATABASE_URI": "teradata://username:password@Database_host_address:1025/default_database"
     }
   }
 }
 ```
 
-### Permissions
-
-The framework has pre-configured permissions for common operations:
-- Bash operations: mkdir, uv, find, mv, grep, npm, ls, cp, chmod, touch
-- File operations: Write, Edit
-- All standard Claude Code tools
 
 ## Code Style Guidelines
 
@@ -455,12 +384,12 @@ When contributing to or extending this project:
 
 ## Usage Examples
 
-### TeradataAssistant (Unified Entry Point)
+### teradata-code-generator (Unified Entry Point)
 ```
-@TeradataAssistant Check the health of my production database
-@TeradataAssistant How do I train an XGBoost model for customer churn prediction?
-@TeradataAssistant I need to clean my dataset and handle missing values before analysis
-@TeradataAssistant How do I calculate moving averages in Teradata?
+@teradata-code-generator Check the health of my production database
+@teradata-code-generator How do I train an XGBoost model for customer churn prediction?
+@teradata-code-generator I need to clean my dataset and handle missing values before analysis
+@teradata-code-generator How do I calculate moving averages in Teradata?
 ```
 
 ### Security Audit
@@ -540,35 +469,3 @@ color: red | blue | green | yellow | purple | orange | pink | cyan
 ## Report / Response
 [Output format and structure]
 ```
-
-## Recent Updates
-
-- **TeradataAssistant Router**: Added intelligent routing agent with progressive prompting architecture
-  - Entry point for all Teradata tasks with automatic persona routing
-  - Three specialized personas: DBA, Data Scientist, Data Engineer
-  - Progressive workflow: Entry → Persona → Process → Function (126+ functions)
-  - Multi-persona task coordination for complex workflows
-- **Agent Organization**: Reorganized agents into domain-specific subdirectories (teradata/, business/, util/)
-- **New Teradata Agents**:
-  - teradata-security-auditor: Comprehensive security analysis and auditing
-  - teradata-space-manager: DBA space management and optimization
-  - compression-advisor: Multi-Value Compression analysis and recommendations
-  - teradata-statistics-collector: Statistics health assessment and maintenance
-- **Business Domain Agents**: Added retail-analytics for business intelligence
-- **Utility Agents**: Enhanced documentation generation (build_schemas, build_DBHierarchy)
-- **Prompt Library**: Expanded TeradataAssistant to 126+ SQL functions with hierarchical prompt structure
-- **Process Prompts**: Added DBA (6 workflows) and ML process workflows
-- **Commands**: Organized skills/commands into utils/ subdirectory
-- **Documentation**: Expanded ai_docs/ with comprehensive Teradata and Claude Code guides
-
-## License
-
-[Add your license information here]
-
-## Contributing
-
-[Add contribution guidelines here]
-
-## Support
-
-[Add support information here]
