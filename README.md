@@ -11,7 +11,7 @@ AgentBuilder enables the creation of intelligent agents that can automate comple
 ```
 AgentBuilder/
 ├── .claude/
-│   ├── agents/              # Agent definitions
+│   ├── agents/              # Agent definitions (sub-agents)
 │   │   ├── teradata/        # Teradata-specific agents
 │   │   │   ├── teradata-code-generator.md           # Main routing agent (entry point)
 │   │   │   ├── teradata-security-auditor.md
@@ -25,9 +25,18 @@ AgentBuilder/
 │   │       ├── load_doc_agent.md      # Agent for loading documentation from URLs
 │   │       ├── build_schemas.md       # Agent for loading database schema information
 │   │       └── build_DBHierarchy.md   # Agent for generating database hierarchy docs
-│   └── commands/            # Skill/command definitions
-│       └── utils/
-│           ├── all_skills.md
+│   ├── commands/            # Slash commands
+│   │   └── utils/
+│   │       └── all_skills.md         # Lists all available skills
+│   └── skills/              # Project skills (model-invoked capabilities)
+│       ├── fork-terminal/            # Terminal forking skill
+│       │   ├── SKILL.md              # Skill definition
+│       │   ├── tools/
+│       │   │   └── fork_terminal.py  # Terminal forking utility
+│       │   ├── prompts/              # Prompt templates
+│       │   └── cookbooks/            # Usage examples
+│       └── another_skill/
+│           └── SKILL.md
 ├── app/                     # TeradataCodeGenerator prompt library
 │   └── TeradataCodeGenerator/
 │       ├── FunctionalPrompts/
@@ -260,10 +269,62 @@ A database hierarchy documentation generator that creates structured documentati
 - Security boundary identification
 - Data governance hierarchy mapping
 
-### Available Skills/Commands
-- **`/utils:all_skills`** - Lists all available skills from system prompt
+## Available Skills/Commands
 
-- **fork-terminal skill** - allows the user to open a terminal session within Claude Code or CLI to run tasks
+Skills are markdown files that extend Claude's capabilities with specialized knowledge for specific tasks. They are model-invoked, meaning Claude automatically decides which skills to use based on your request.
+
+For complete information about creating and using skills, see [doc_skills.md](ai_docs/doc_skills.md).
+
+### Current Skills
+
+#### `/utils:all_skills`
+Lists all available skills loaded in your system prompt.
+
+**Usage:**
+```
+/utils:all_skills
+```
+
+#### `fork-terminal`
+Creates a forked terminal session within Claude Code or CLI to run tasks.
+
+**Usage:**
+Use when you need to:
+- Create a new terminal session
+- Fork an existing session
+- Run commands in an isolated terminal environment
+
+**Trigger phrases:**
+```
+fork a terminal
+create a terminal
+fork session
+new terminal: <command>
+```
+
+### Creating New Skills
+
+Skills are stored in:
+- **Project Skills**: `.claude/commands/` (shared with repository)
+- **Personal Skills**: `~/.claude/skills/` (available across all projects)
+
+To create a new skill:
+1. Create a directory in `.claude/commands/` or `~/.claude/skills/`
+2. Add a `SKILL.md` file with YAML metadata and instructions
+3. Restart Claude Code to load the new skill
+
+Example structure:
+```markdown
+---
+name: my-skill-name
+description: Brief description of what this skill does and when to use it
+---
+
+# Instructions
+Provide clear guidance for Claude on how to use this skill.
+```
+
+For detailed skill authoring guidance, see [doc_skills.md](ai_docs/doc_skills.md).
 
 
 ## TeradataCodeGenerator Prompt Library
